@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage (clone git repo) {
       steps {
-       url: "" , branch: "main" 
+       url: "https://github.com/Qazaidi123/kubernetes.git" , branch: "main" 
       }
     stage (EKS cluster deploy) {
       steps {
