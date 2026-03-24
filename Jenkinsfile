@@ -2,7 +2,7 @@ pipeline {
   agent any
 
   environment {
-    SONAR_HOME = TOOL "Sonar"
+    SONAR_HOME = tool "Sonar"
     IMAGE_NAME = "qazaidi123/kubeimage"
     IMAGE_TAG = "${BUILD_NUMBER}"
     DOCKER_CREDS = credential('dockerhub-creds')
@@ -14,7 +14,7 @@ pipeline {
       }
     }
 
-    stage {"SonarQube Analysis")
+    stage("SonarQube Analysis") {
       steps {
         withSonarQubeEnv("Sonar") {
           sh "$SONAR_HOME/bin/sonar-scanner -Dsonar.projectName=NETLIPROJ -Dsonar.projectKey=NETLIPROJ"
@@ -46,7 +46,7 @@ pipeline {
         withAWS(credentials: 'aws-creds') {
         sh " aws eks --region ap-south-1 update-kubeconfig --name ekscluster "
         sh " kubectl get pods "
-        sh " sed -i 's|IMAGE_PLACEHOLDER|$IMAGE_NAME:$IMAGE_TAG|G' K8s/deployment.yaml"
+        sh " sed -i 's|IMAGE_PLACEHOLDER|$IMAGE_NAME:$IMAGE_TAG|g' K8s/deployment.yaml"
                   sh " kubectl apply -f k8s/deployment.yaml"
                   sh " kubectl apply -f k8s/service.yaml"
         }
