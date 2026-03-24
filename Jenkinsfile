@@ -8,7 +8,7 @@ pipeline {
     DOCKER_CREDS = credential('dockerhub-creds')
   }
   stages {
-    stage(clone git repo) {
+    stage("clone git repo") {
       steps {
        git url:"https://github.com/Qazaidi123/kubernetes.git" , branch:"main" 
       }
