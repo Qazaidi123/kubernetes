@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: netlicon
-        image: qazaidi123/kbimg
+        image: IMAGE_PLACEHOLDER
         ports:
         - containerPort: 80
