@@ -43,7 +43,7 @@ pipeline {
     }
     stage ("EKS cluster deploy") {
       steps {
-        withAWS(credentials: 'aws-creds') {
+        withAWS(credentials: 'AWS-CREDENTIALS') {
         sh " aws eks --region ap-south-1 update-kubeconfig --name ekscluster "
         sh " kubectl get pods "
         sh " sed -i 's|IMAGE_PLACEHOLDER|$IMAGE_NAME:$IMAGE_TAG|g' K8s/deployment.yaml"
