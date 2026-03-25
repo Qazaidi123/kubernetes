@@ -5,7 +5,7 @@ pipeline {
     SONAR_HOME = tool "Sonar"
     IMAGE_NAME = "qazaidi123/kubeimage"
     IMAGE_TAG = "${BUILD_NUMBER}"
-    DOCKER_CREDS = credential('dockerhub-creds')
+    DOCKER_CREDS = credentials('dockerhub-creds')
   }
   stages {
     stage("clone git repo") {
