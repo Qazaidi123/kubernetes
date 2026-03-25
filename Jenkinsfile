@@ -41,7 +41,7 @@ pipeline {
         sh " docker push $IMAGE_NAME:$IMAGE_TAG "
       }
     }
-    stage (EKS cluster deploy) {
+    stage ("EKS cluster deploy") {
       steps {
         withAWS(credentials: 'aws-creds') {
         sh " aws eks --region ap-south-1 update-kubeconfig --name ekscluster "
