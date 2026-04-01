@@ -1,0 +1,38 @@
+---
+- hosts: all
+  become: yes
+
+  tasks:
+
+  - name: Disable swap
+    command: swapoff -a
+
+  - name: Install dependencies
+    apt:
+      name:
+        - docker.io
+        - apt-transport-https
+        - curl
+      state: present
+      update_cache: yes
+
+  - name: Enable docker
+    service:
+      name: docker
+      state: started
+      enabled: yes
+
+  - name: Add Kubernetes repo
+    shell: |
+      curl -fsSL https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
+      echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" \
+      > /etc/apt/sources.list.d/kubernetes.list
+
+  - name: Install kube tools
+    apt:
+      name:
+        - kubelet
+        - kubeadm
+        - kubectl
+      state: present
+      update_cache: yes
