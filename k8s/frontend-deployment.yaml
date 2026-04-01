@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: netli
+  name: frontend-deployment
   labels:
-    app: netli
+    app: frontend-depl
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: netli
+      app: exploreworld
   template:
     metadata:
       labels:
-        app: netli
+        app: exploreworld
     spec:
       containers:
-      - name: netlicon
+      - name: frontend-container
         image: IMAGE_PLACEHOLDER
         ports:
         - containerPort: 80
