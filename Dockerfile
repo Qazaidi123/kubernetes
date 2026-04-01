@@ -13,5 +13,7 @@ COPY backend/api.php /var/www/html/api.php
 RUN chmod -R 755 /var/www/html
 RUN chown -R www-data:www-data /var/www/html
 
+# modify apache config inside container
 RUN sed -i 's/AllowOverride None/AllowOverride All/g' /etc/apache2/apache2.conf
+
 EXPOSE 80
