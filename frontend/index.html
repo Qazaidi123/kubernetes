@@ -3,96 +3,153 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ExploreWorld - Travel the World</title>
+<title>ExploreWorld - Production Travel App</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
 <style>
-body { margin:0; font-family:'Poppins',sans-serif; background:#f5f7fa; }
-header { display:flex; justify-content:space-between; align-items:center; padding:15px 40px; background:#0a2540; color:white; }
-header h1 { margin:0; }
+body { margin:0; font-family:'Poppins',sans-serif; background:#f4f6f9; }
+header { display:flex; justify-content:space-between; padding:15px 40px; background:#0a2540; color:white; }
 nav span { margin:0 15px; cursor:pointer; }
-.hero { height:90vh; background:url('https://source.unsplash.com/1600x900/?travel') center/cover; display:flex; flex-direction:column; justify-content:center; align-items:center; color:white; text-shadow:0 2px 5px black; }
-.hero h2 { font-size:48px; }
+.hero { height:90vh; background:url('https://source.unsplash.com/1600x900/?travel,world') center/cover; display:flex; flex-direction:column; justify-content:center; align-items:center; color:white; }
+.hero h1 { font-size:50px; }
 .btn { padding:10px 20px; background:#ff7a18; border:none; color:white; border-radius:5px; cursor:pointer; }
 .section { padding:40px; }
 .cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:20px; }
-.card { background:white; border-radius:15px; overflow:hidden; box-shadow:0 4px 15px rgba(0,0,0,0.1); cursor:pointer; }
+.card { background:white; border-radius:15px; box-shadow:0 5px 15px rgba(0,0,0,0.1); overflow:hidden; }
 .card img { width:100%; height:180px; object-fit:cover; }
 .card div { padding:15px; }
 .hidden { display:none; }
-.gallery img { width:250px; margin:10px; border-radius:10px; }
-.modal { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); display:flex; justify-content:center; align-items:center; }
-.modal-box { background:white; padding:30px; border-radius:10px; width:300px; }
-.modal-box input { width:100%; margin:10px 0; padding:8px; }
-footer { background:#0a2540; color:white; text-align:center; padding:15px; }
+input, select { width:100%; padding:8px; margin:10px 0; }
+.modal { position:fixed; top:0; width:100%; height:100%; background:rgba(0,0,0,0.6); display:flex; justify-content:center; align-items:center; }
+.modal-box { background:white; padding:25px; border-radius:10px; width:320px; }
+.dashboard { display:grid; grid-template-columns:1fr 3fr; }
+.sidebar { background:#0a2540; color:white; padding:20px; }
+.sidebar div { margin:15px 0; cursor:pointer; }
+.content { padding:20px; }
+footer { background:#0a2540; color:white; text-align:center; padding:10px; }
 </style>
 </head>
-<body>
 
+<body>
 <header>
-<h1>ExploreWorld</h1>
+<h2>ExploreWorld</h2>
 <nav>
 <span onclick="showHome()">Home</span>
 <span onclick="showExplore()">Explore</span>
-<span onclick="openAuth()">Login/Register</span>
-<span>☎ 1800-123-999</span>
+<span onclick="showBooking()">Book</span>
+<span onclick="openAuth()">Login</span>
 </nav>
 </header>
 
 <section id="home" class="hero">
-<h2>Travel Beyond Limits</h2>
-<p>Best International Tour Packages</p>
-<button class="btn" onclick="showExplore()">Explore Now</button>
+<h1>Explore the World</h1>
+<button class="btn" onclick="showExplore()">Start Exploring</button>
 </section>
 
 <section id="explore" class="section hidden">
-<h2>Top Destinations</h2>
+<h2>Destinations</h2>
 <div class="cards">
-<div class="card" onclick="showGallery('switzerland')">
+<div class="card" onclick="selectDestination('Switzerland',25000)">
 <img src="https://source.unsplash.com/400x300/?switzerland">
-<div><h3>Switzerland</h3><p>₹25,000 | 4N/3D</p></div>
+<div><h3>Switzerland</h3><p>₹25,000</p></div>
 </div>
-<div class="card" onclick="showGallery('paris')">
-<img src="https://source.unsplash.com/400x300/?paris">
-<div><h3>Paris</h3><p>₹30,000 | 5N/4D</p></div>
-</div>
-<div class="card" onclick="showGallery('dubai')">
+<div class="card" onclick="selectDestination('Dubai',20000)">
 <img src="https://source.unsplash.com/400x300/?dubai">
-<div><h3>Dubai</h3><p>₹20,000 | 3N/2D</p></div>
+<div><h3>Dubai</h3><p>₹20,000</p></div>
 </div>
-<div class="card" onclick="showGallery('bali')">
+<div class="card" onclick="selectDestination('Bali',22000)">
 <img src="https://source.unsplash.com/400x300/?bali">
-<div><h3>Bali</h3><p>₹22,000 | 4N/3D</p></div>
+<div><h3>Bali</h3><p>₹22,000</p></div>
 </div>
 </div>
 </section>
 
-<section id="gallery" class="section hidden">
-<h2 id="title"></h2>
-<div class="gallery" id="galleryBox"></div>
+<section id="booking" class="section hidden">
+<h2>Book Your Trip</h2>
+<input id="name" placeholder="Name">
+<input id="email" placeholder="Email">
+<select id="destination"></select>
+<input id="people" type="number" placeholder="No. of People">
+<button class="btn" onclick="calculatePrice()">Calculate Price</button>
+<h3 id="price"></h3>
+<button class="btn" onclick="confirmBooking()">Confirm Booking</button>
+</section>
+
+<section id="dashboard" class="hidden">
+<div class="dashboard">
+<div class="sidebar">
+<h3>Admin Panel</h3>
+<div onclick="loadBookings()">Bookings</div>
+</div>
+<div class="content">
+<h2>Bookings</h2>
+<ul id="bookingList"></ul>
+</div>
+</div>
 </section>
 
 <div id="auth" class="modal hidden">
 <div class="modal-box">
-<h3>Login / Register</h3>
-<input placeholder="Name">
-<input placeholder="Mobile">
-<input placeholder="Email">
-<button class="btn">Submit</button>
+<h3>Login</h3>
+<input id="loginEmail" placeholder="Email">
+<button class="btn" onclick="login()">Login</button>
 <button onclick="closeAuth()">Close</button>
 </div>
 </div>
 
 <footer>
-<p>Contact our Tour Expert: support@exploreworld.com | 1800-123-999</p>
+<p>Support: support@exploreworld.com | 1800-123-999</p>
 </footer>
 
 <script>
+let selected = {};
+let bookings = [];
+
+function hideAll(){['home','explore','booking','dashboard'].forEach(id=>document.getElementById(id).classList.add('hidden'));}
+
 function showHome(){hideAll();document.getElementById('home').classList.remove('hidden');}
 function showExplore(){hideAll();document.getElementById('explore').classList.remove('hidden');}
-function showGallery(place){hideAll();document.getElementById('gallery').classList.remove('hidden');document.getElementById('title').innerText=place.toUpperCase();let box=document.getElementById('galleryBox');box.innerHTML='';for(let i=0;i<6;i++){let img=document.createElement('img');img.src=`https://source.unsplash.com/300x200/?${place}`;box.appendChild(img);}}
+function showBooking(){hideAll();document.getElementById('booking').classList.remove('hidden');}
+
+function selectDestination(name, price){
+selected = {name, price};
+showBooking();
+document.getElementById('destination').innerHTML = `<option>${name}</option>`;
+}
+
+function calculatePrice(){
+let people = document.getElementById('people').value;
+let total = people * selected.price;
+document.getElementById('price').innerText = 'Total: ₹'+total;
+}
+
+function confirmBooking(){
+let name = document.getElementById('name').value;
+let email = document.getElementById('email').value;
+bookings.push({name,email,...selected});
+alert('Booking Confirmed');
+}
+
 function openAuth(){document.getElementById('auth').classList.remove('hidden');}
 function closeAuth(){document.getElementById('auth').classList.add('hidden');}
-function hideAll(){document.getElementById('home').classList.add('hidden');document.getElementById('explore').classList.add('hidden');document.getElementById('gallery').classList.add('hidden');}
+
+function login(){
+let email = document.getElementById('loginEmail').value;
+if(email==='admin@explore.com'){
+hideAll();
+document.getElementById('dashboard').classList.remove('hidden');
+}
+}
+
+function loadBookings(){
+let list = document.getElementById('bookingList');
+list.innerHTML='';
+bookings.forEach(b=>{
+let li = document.createElement('li');
+li.innerText = `${b.name} booked ${b.name} trip`;
+list.appendChild(li);
+});
+}
 </script>
 
 </body>
