@@ -3,170 +3,100 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ExploreWorld - Premium Travel</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-
-<style>
-body { margin:0; font-family:'Poppins',sans-serif; }
-header { display:flex; justify-content:space-between; align-items:center; padding:15px 40px; background:rgba(0,0,0,0.6); color:white; position:fixed; width:100%; z-index:10; }
-nav span { margin:0 15px; cursor:pointer; }
-.right-nav { display:flex; align-items:center; }
-
-.hero { height:100vh; background:url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1600') center/cover no-repeat; display:flex; flex-direction:column; justify-content:center; align-items:center; color:white; text-align:center; }
-.hero h1 { font-size:60px; margin:0; }
-.hero p { font-size:20px; }
-.btn { padding:12px 25px; background:#ff7a18; border:none; color:white; border-radius:5px; cursor:pointer; margin-top:20px; }
-
-.section { padding:80px 40px; }
-.cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:25px; }
-.card { background:white; border-radius:15px; overflow:hidden; box-shadow:0 6px 20px rgba(0,0,0,0.15); cursor:pointer; transition:0.3s; }
-.card:hover { transform:scale(1.05); }
-.card img { width:100%; height:180px; object-fit:cover; }
-.card div { padding:15px; }
-.hidden { display:none !important; }
-
-#images img { width:250px; margin:10px; border-radius:10px; }
-
-.modal { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); display:none; justify-content:center; align-items:center; }
-.modal-box { background:white; padding:25px; border-radius:10px; width:320px; }
-
-footer { background:#0a2540; color:white; text-align:center; padding:15px; }
-</style>
+<title>ExploreWorld</title>
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
+
 <header>
-<h2>ExploreWorld</h2>
-<nav>
-<span onclick="showHome()">Home</span>
-<span onclick="showExplore()">Destinations</span>
-</nav>
-<div class="right-nav">
-<span onclick="openAuth()">Login / Register</span>
-<span>☎ 1800-123-999</span>
-</div>
+    <h2>ExploreWorld</h2>
+    <nav>
+        <span onclick="showHome()">Home</span>
+        <span onclick="showExplore()">Destinations</span>
+    </nav>
+    <div class="right-nav">
+        <span onclick="login()">Login</span>
+        <span>☎ 1800-123-999</span>
+    </div>
 </header>
 
+<!-- HERO -->
 <section id="home" class="hero">
-<h1>Explore The World</h1>
-<p>Luxury Tours | Best Prices | Trusted by Travelers</p>
-<button class="btn" onclick="showExplore()">Explore Destinations</button>
+    <h1>Explore The World</h1>
+    <p>Luxury Travel Packages</p>
+    <button onclick="showExplore()">Explore Destinations</button>
 </section>
 
-<section id="explore" class="section hidden">
-<h2>Top Destinations</h2>
-<div class="cards">
+<!-- DESTINATIONS -->
+<section id="explore" class="hidden">
+    <h2>Top Destinations</h2>
+    <div class="cards">
 
-<div class="card" onclick="showGallery('Switzerland')">
-<img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=400">
-<div><h3>Switzerland</h3><p>₹25,000 | 4N/3D</p></div>
-</div>
+        <div class="card" onclick="showGallery('Switzerland')">
+            <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=400">
+            <h3>Switzerland</h3>
+            <p>₹25,000 | 4N/3D</p>
+        </div>
 
-<div class="card" onclick="showGallery('Paris')">
-<img src="https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=400">
-<div><h3>Paris</h3><p>₹30,000 | 5N/4D</p></div>
-</div>
+        <div class="card" onclick="showGallery('Paris')">
+            <img src="https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=400">
+            <h3>Paris</h3>
+            <p>₹30,000 | 5N/4D</p>
+        </div>
 
-<div class="card" onclick="showGallery('Dubai')">
-<img src="https://images.unsplash.com/photo-1508057198894-247b23fe5ade?w=400">
-<div><h3>Dubai</h3><p>₹20,000 | 3N/2D</p></div>
-</div>
+        <div class="card" onclick="showGallery('Dubai')">
+            <img src="https://images.unsplash.com/photo-1508057198894-247b23fe5ade?w=400">
+            <h3>Dubai</h3>
+            <p>₹20,000 | 3N/2D</p>
+        </div>
 
-<div class="card" onclick="showGallery('Bali')">
-<img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400">
-<div><h3>Bali</h3><p>₹22,000 | 4N/3D</p></div>
-</div>
+        <!-- Updated images -->
 
-<div class="card" onclick="showGallery('Maldives')">
-<img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=401">
-<div><h3>Maldives</h3><p>₹40,000 | 5N/4D</p></div>
-</div>
+        <div class="card" onclick="showGallery('Bali')">
+            <img src="https://images.unsplash.com/photo-1549880338-65ddcdfd017b?w=400">
+            <h3>Bali</h3>
+            <p>₹22,000 | 4N/3D</p>
+        </div>
 
-<div class="card" onclick="showGallery('Thailand')">
-<img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=402">
-<div><h3>Thailand</h3><p>₹18,000 | 3N/2D</p></div>
-</div>
+        <div class="card" onclick="showGallery('Maldives')">
+            <img src="https://images.unsplash.com/photo-1573843981267-be1999ff37cd?w=400">
+            <h3>Maldives</h3>
+            <p>₹40,000 | 5N/4D</p>
+        </div>
 
-</div>
+        <div class="card" onclick="showGallery('Thailand')">
+            <img src="https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?w=400">
+            <h3>Thailand</h3>
+            <p>₹18,000 | 3N/2D</p>
+        </div>
+
+    </div>
 </section>
 
-<section id="gallery" class="section hidden">
-<h2 id="title"></h2>
-<div id="images"></div>
-<button class="btn" onclick="openAuth()">Register to Book</button>
+<!-- GALLERY -->
+<section id="gallery" class="hidden">
+    <h2 id="title"></h2>
+    <div id="images"></div>
+    <button onclick="goBooking()">Book Now</button>
 </section>
 
-<div id="auth" class="modal">
-<div class="modal-box">
-<h3>Register / Login</h3>
-<input placeholder="Name">
-<input placeholder="Mobile">
-<input placeholder="Email">
-<button class="btn">Submit</button>
-<button onclick="closeAuth()">Close</button>
-</div>
-</div>
+<!-- BOOKING -->
+<section id="booking" class="hidden">
+    <h2>Book Your Trip</h2>
+    <input id="name" placeholder="Name">
+    <input id="email" placeholder="Email">
+    <button onclick="confirmBooking()">Confirm Booking</button>
+</section>
 
-<footer>
-<p>Contact: support@exploreworld.com | 1800-123-999</p>
-</footer>
+<!-- ADMIN -->
+<section id="admin" class="hidden">
+    <h2>Admin Dashboard</h2>
+    <button onclick="loadBookings()">Load Bookings</button>
+    <ul id="list"></ul>
+</section>
 
-<script>
-function hideAll(){['home','explore','gallery'].forEach(id=>document.getElementById(id).classList.add('hidden'));}
-
-function showHome(){hideAll();document.getElementById('home').classList.remove('hidden');}
-function showExplore(){hideAll();document.getElementById('explore').classList.remove('hidden');}
-
-function showGallery(place){
-hideAll();
-document.getElementById('gallery').classList.remove('hidden');
-document.getElementById('title').innerText = place;
-
-let data = {
-Switzerland:[
-'https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=300',
-'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=300',
-'https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=300',
-'https://images.unsplash.com/photo-1500048993959-dc8c58c0d9b7?w=300',
-'https://images.unsplash.com/photo-1491553895911-0055eca6402d?w=300'
-],
-Paris:[
-'https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=300',
-'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=300',
-'https://images.unsplash.com/photo-1522098543979-ffc7f79d6c01?w=300',
-'https://images.unsplash.com/photo-1499510318569-4b3c9a7c3a52?w=300'
-],
-Dubai:[
-'https://images.unsplash.com/photo-1508057198894-247b23fe5ade?w=300',
-'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=300',
-'https://images.unsplash.com/photo-1504215680853-026ed2a45def?w=300'
-],
-Bali:[
-'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=300',
-'https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=300'
-],
-Maldives:[
-'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=301',
-'https://images.unsplash.com/photo-1501117716987-c8e1ecb210c1?w=300'
-],
-Thailand:[
-'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=302',
-'https://images.unsplash.com/photo-1528184039930-bd03972bd974?w=300'
-]
-};
-
-let images = document.getElementById('images');
-images.innerHTML='';
-data[place].forEach(src=>{
-let img=document.createElement('img');
-img.src=src;
-images.appendChild(img);
-});
-}
-
-function openAuth(){document.getElementById('auth').style.display='flex';}
-function closeAuth(){document.getElementById('auth').style.display='none';}
-</script>
+<script src="script.js"></script>
 
 </body>
 </html>
