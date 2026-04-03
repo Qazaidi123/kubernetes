@@ -8,22 +8,76 @@
 
 <body>
 
+<!-- Navbar -->
 <header>
-    <h1>🌍 ExploreWorld</h1>
-    <p>Discover Beautiful Destinations</p>
+    <h1>ExploreWorld</h1>
+    <nav>
+        <ul>
+            <li onclick="showHome()">Home</li>
+            <li onclick="showExplore()">Explore Destinations</li>
+            <li onclick="openAuth()">Login/Register</li>
+            <li>Contact: 1800-123-999</li>
+        </ul>
+    </nav>
 </header>
 
-<section class="search">
-    <button onclick="loadDestinations()">Explore Destinations</button>
+<!-- Home Section -->
+<section id="home">
+    <h2>Discover Your Next Adventure</h2>
+    <p>Best tour packages at affordable prices</p>
 </section>
 
-<section id="destinations" class="cards"></section>
+<!-- Explore Section -->
+<section id="explore" class="hidden">
+    <h2>Top Destinations</h2>
+    <div class="cards">
 
-<footer>
-    <p>© 2026 ExploreWorld | DevOps Demo Project</p>
-</footer>
+        <div class="card" onclick="showGallery('swiss')">
+            <h3>Switzerland</h3>
+            <p>₹25,000 | 4N/3D</p>
+        </div>
+
+        <div class="card" onclick="showGallery('paris')">
+            <h3>Paris</h3>
+            <p>₹30,000 | 5N/4D</p>
+        </div>
+
+        <div class="card" onclick="showGallery('dubai')">
+            <h3>Dubai</h3>
+            <p>₹20,000 | 3N/2D</p>
+        </div>
+
+        <div class="card" onclick="showGallery('bali')">
+            <h3>Bali</h3>
+            <p>₹22,000 | 4N/3D</p>
+        </div>
+
+        <div class="card" onclick="showGallery('maldives')">
+            <h3>Maldives</h3>
+            <p>₹40,000 | 5N/4D</p>
+        </div>
+
+    </div>
+</section>
+
+<!-- Gallery Section -->
+<section id="gallery" class="hidden">
+    <h2 id="galleryTitle"></h2>
+    <div id="images"></div>
+</section>
+
+<!-- Login/Register Modal -->
+<div id="authModal" class="modal hidden">
+    <div class="modal-content">
+        <span onclick="closeAuth()" class="close">&times;</span>
+        <h2>Register / Login</h2>
+        <input type="text" placeholder="Name"><br>
+        <input type="text" placeholder="Mobile Number"><br>
+        <input type="email" placeholder="Email"><br>
+        <button>Submit</button>
+    </div>
+</div>
 
 <script src="script.js"></script>
-
 </body>
 </html>
