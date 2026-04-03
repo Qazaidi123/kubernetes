@@ -1,29 +1,25 @@
 <?php
+$file = "data.json";
 
-header("Content-Type: application/json");
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $data = json_decode(file_get_contents("php://input"), true);
 
-$host = "mysql";
-$user = "root";
-$password = "root";
-$db = "exploreworld";
+    $existing = [];
+    if (file_exists($file)) {
+        $existing = json_decode(file_get_contents($file), true);
+    }
 
-$conn = new mysqli($host, $user, $password, $db);
+    $existing[] = $data;
 
-if ($conn->connect_error) {
-    die(json_encode(["error" => "Database connection failed"]));
+    file_put_contents($file, json_encode($existing));
+    echo "Saved";
 }
 
-$sql = "SELECT name, description, image FROM destinations";
-$result = $conn->query($sql);
-
-$data = array();
-
-while($row = $result->fetch_assoc()) {
-    $data[] = $row;
+if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+    if (file_exists($file)) {
+        echo file_get_contents($file);
+    } else {
+        echo "[]";
+    }
 }
-
-echo json_encode($data);
-
-$conn->close();
-
 ?>
