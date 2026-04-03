@@ -19,9 +19,9 @@ nav span { margin:0 15px; cursor:pointer; }
 .card { background:white; border-radius:15px; box-shadow:0 5px 15px rgba(0,0,0,0.1); overflow:hidden; cursor:pointer; }
 .card img { width:100%; height:180px; object-fit:cover; }
 .card div { padding:15px; }
-.hidden { display:none; }
+.hidden { display:none !important; }
 input, select { width:100%; padding:8px; margin:10px 0; }
-.modal { position:fixed; top:0; width:100%; height:100%; background:rgba(0,0,0,0.6); display:flex; justify-content:center; align-items:center; }
+.modal { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); display:none; justify-content:center; align-items:center; z-index:1000; }
 .modal-box { background:white; padding:25px; border-radius:10px; width:320px; }
 footer { background:#0a2540; color:white; text-align:center; padding:10px; }
 </style>
@@ -135,8 +135,8 @@ function confirmBooking(){
 alert('Booking Confirmed! Our team will contact you.');
 }
 
-function openAuth(){document.getElementById('auth').classList.remove('hidden');}
-function closeAuth(){document.getElementById('auth').classList.add('hidden');}
+function openAuth(){document.getElementById('auth').style.display='flex';}
+function closeAuth(){document.getElementById('auth').style.display='none';}
 </script>
 
 </body>
