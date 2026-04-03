@@ -1,54 +1,66 @@
-function showHome() {
-    hideAll();
-    document.getElementById("home").classList.remove("hidden");
+let selected = "";
+
+function hideAll(){
+    ["home","explore","gallery","booking","admin"]
+    .forEach(id => document.getElementById(id).classList.add("hidden"));
 }
 
-function showExplore() {
-    hideAll();
-    document.getElementById("explore").classList.remove("hidden");
-}
+function showHome(){ hideAll(); document.getElementById("home").classList.remove("hidden"); }
+function showExplore(){ hideAll(); document.getElementById("explore").classList.remove("hidden"); }
 
-function showGallery(place) {
+function showGallery(place){
     hideAll();
+    selected = place;
     document.getElementById("gallery").classList.remove("hidden");
-
-    let imagesDiv = document.getElementById("images");
-    imagesDiv.innerHTML = "";
-
-    let title = document.getElementById("galleryTitle");
+    document.getElementById("title").innerText = place;
 
     let data = {
-        swiss: ["https://source.unsplash.com/200x200/?switzerland",
-                "https://source.unsplash.com/200x200/?alps"],
-        paris: ["https://source.unsplash.com/200x200/?paris",
-                "https://source.unsplash.com/200x200/?eiffel"],
-        dubai: ["https://source.unsplash.com/200x200/?dubai",
-                "https://source.unsplash.com/200x200/?burjkhalifa"],
-        bali: ["https://source.unsplash.com/200x200/?bali",
-               "https://source.unsplash.com/200x200/?beach"],
-        maldives: ["https://source.unsplash.com/200x200/?maldives",
-                   "https://source.unsplash.com/200x200/?resort"]
+        Switzerland:["snow","mountain","lake","alps"],
+        Paris:["eiffel","paris street","louvre"],
+        Dubai:["burj khalifa","desert","dubai marina"],
+        Bali:["bali beach","temple","island"],
+        Maldives:["resort","beach","water villa"],
+        Thailand:["phuket","temple thailand","beach thailand"]
     };
 
-    title.innerText = place.toUpperCase();
+    let box = document.getElementById("images");
+    box.innerHTML = "";
 
-    data[place].forEach(img => {
-        let image = document.createElement("img");
-        image.src = img;
-        imagesDiv.appendChild(image);
+    data[place].forEach(tag=>{
+        let img = document.createElement("img");
+        img.src = `https://source.unsplash.com/300x200/?${tag}`;
+        box.appendChild(img);
     });
 }
 
-function openAuth() {
-    document.getElementById("authModal").classList.remove("hidden");
+function goBooking(){
+    hideAll();
+    document.getElementById("booking").classList.remove("hidden");
 }
 
-function closeAuth() {
-    document.getElementById("authModal").classList.add("hidden");
+function confirmBooking(){
+    let name = document.getElementById("name").value;
+    let email = document.getElementById("email").value;
+
+    fetch("api.php", {
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body: JSON.stringify({name,email,destination:selected})
+    })
+    .then(res=>res.text())
+    .then(()=> alert("Booking Saved"));
 }
 
-function hideAll() {
-    document.getElementById("home").classList.add("hidden");
-    document.getElementById("explore").classList.add("hidden");
-    document.getElementById("gallery").classList.add("hidden");
+function loadBookings(){
+    fetch("api.php")
+    .then(res=>res.json())
+    .then(data=>{
+        let list = document.getElementById("list");
+        list.innerHTML="";
+        data.forEach(b=>{
+            let li=document.createElement("li");
+            li.innerText = `${b.name} booked ${b.destination}`;
+            list.appendChild(li);
+        });
+    });
 }
