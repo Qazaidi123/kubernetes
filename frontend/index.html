@@ -50,15 +50,15 @@ footer { background:#0a2540; color:white; text-align:center; padding:10px; }
 <h2>Top Destinations</h2>
 <div class="cards">
 <div class="card" onclick="showGallery('Switzerland',25000)">
-<img src="https://source.unsplash.com/400x300/?switzerland">
+<img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=400">
 <div><h3>Switzerland</h3><p>₹25,000 | 4N/3D</p></div>
 </div>
 <div class="card" onclick="showGallery('Paris',30000)">
-<img src="https://source.unsplash.com/400x300/?paris">
+<img src="https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=400">
 <div><h3>Paris</h3><p>₹30,000 | 5N/4D</p></div>
 </div>
 <div class="card" onclick="showGallery('Dubai',20000)">
-<img src="https://source.unsplash.com/400x300/?dubai">
+<img src="https://images.unsplash.com/photo-1508057198894-247b23fe5ade?w=400">
 <div><h3>Dubai</h3><p>₹20,000 | 3N/2D</p></div>
 </div>
 </div>
@@ -113,7 +113,7 @@ let images = document.getElementById('images');
 images.innerHTML='';
 for(let i=0;i<5;i++){
 let img = document.createElement('img');
-img.src = `https://source.unsplash.com/300x200/?${place}`;
+img.src = `https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=300`;
 img.style.margin='10px';
 img.style.borderRadius='10px';
 images.appendChild(img);
